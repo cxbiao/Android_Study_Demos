@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BarCodeTest</string>
+    <string name="scan_text">The two-dimensional code into the box, can automatically scan</string>
+    <string name="scan_barcode">Sweep</string>
+    <string name="choose_from_photo_album">photo album</string>
+    <string name="choose_from_my_code">my code</string>
+    <string name="choose_from_lights">lights</string>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">扫一扫</string>
+    <string name="scan_text">将取景框对准二维码即可自动扫描</string>
+    <string name="scan_barcode">扫一扫</string>
+    <string name="choose_from_photo_album">相册</string>
+    <string name="choose_from_my_code">我的二维码</string>
+    <string name="choose_from_lights">开灯</string>
+
+</resources>
