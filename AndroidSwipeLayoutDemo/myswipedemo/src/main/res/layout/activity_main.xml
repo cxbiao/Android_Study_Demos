@@ -1,0 +1,39 @@
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/my_swipelayout"
+    android:background="#f2f2f2"
+    tools:context=".MainActivity">
+
+    <!-- Bottom View Start-->
+    <LinearLayout
+        android:background="#66ddff00"
+        android:id="@+id/bottom_wrapper"
+        android:layout_gravity="left|right"
+        android:layout_width="160dp"
+        android:layout_height="match_parent">
+        <!--What you want to show-->
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@mipmap/ic_launcher"/>
+    </LinearLayout>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <!--What you want to show in SurfaceView-->
+
+        <include layout="@layout/sample1" android:layout_height="80dp" android:layout_width="match_parent"></include>
+        <include layout="@layout/sample2" android:layout_height="80dp" android:layout_width="match_parent" android:layout_marginTop="20dp"></include>
+    </LinearLayout>
+    <!-- Surface View End -->
+
+</com.daimajia.swipe.SwipeLayout>

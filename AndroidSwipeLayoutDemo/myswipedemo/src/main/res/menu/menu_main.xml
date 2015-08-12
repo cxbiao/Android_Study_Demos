@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+
+    <item android:id="@+id/action_listview" android:title="listview"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_gridview" android:title="gridview"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_recyclerview" android:title="recyclerview"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_comliate" android:title="complicate"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>
