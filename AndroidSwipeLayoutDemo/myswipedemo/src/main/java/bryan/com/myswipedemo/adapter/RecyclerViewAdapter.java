@@ -58,7 +58,12 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         viewHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show();
+                int index = viewHolder.getLayoutPosition();
+                if( viewHolder.swipeLayout.getOpenStatus()==SwipeLayout.Status.Close){
+                    Toast.makeText(context, index+"clicked", Toast.LENGTH_SHORT).show();
+                }else{
+                    viewHolder.swipeLayout.close(true);
+                }
             }
         });
 
