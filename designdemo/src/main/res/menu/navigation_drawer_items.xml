@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/navItem1"
+            android:icon="@drawable/ic_action_location_found_dark"
+            android:title="Home"/>
+        <item
+            android:id="@+id/navItem2"
+            android:icon="@drawable/ic_action_location_found_dark"
+            android:title="Blog"/>
+
+        <item
+            android:id="@+id/navItem3"
+            android:icon="@drawable/ic_action_location_found_dark"
+            android:title="About"/>
+
+        <item
+            android:id="@+id/navItem4"
+            android:icon="@drawable/ic_action_location_found_dark"
+            android:title="Contact"/>
+    </group>
+
+</menu>
