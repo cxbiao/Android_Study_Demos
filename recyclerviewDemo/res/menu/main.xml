@@ -49,5 +49,11 @@
         android:orderInCategory="100"
          android:title="嵌套recycleview"
         app:showAsAction="never"/>
+       
+       <item
+        android:id="@+id/id_action_refesh"
+        android:orderInCategory="100"
+         android:title="刷新测试"
+        app:showAsAction="never"/>
 
 </menu>

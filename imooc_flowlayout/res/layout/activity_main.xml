@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.imooc.view.FlowLayout
+        android:padding="20dp"
+        android:id="@+id/id_flowlayout"
+        android:layout_width="fill_parent"
+        android:background="#E5E5F5"
+        android:layout_height="wrap_content" >
+
+    </com.imooc.view.FlowLayout>
+
+</RelativeLayout>

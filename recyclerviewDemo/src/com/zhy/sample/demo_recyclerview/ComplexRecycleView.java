@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Toast;
 
 import com.zhy.sample.demo_recyclerview.MyGridAdapter.OnItemClickLitener;
@@ -120,15 +123,15 @@ public class ComplexRecycleView extends AppCompatActivity
 					int newState) {
 				// TODO Auto-generated method stub
 				//当recyclerview处于空闲时才加载
-				if(newState==RecyclerView.SCROLL_STATE_IDLE && isReadyForPullEnd()){
-					loadDialog.show();
-		        	mHandler.sendEmptyMessageDelayed(1, 2000);
-				}
-				
-				if(newState==RecyclerView.SCROLL_STATE_IDLE && isReadyForPullStart()){
-					loadDialog.show();
-		        	mHandler.sendEmptyMessageDelayed(0, 2000);
-				}
+//				if(newState==RecyclerView.SCROLL_STATE_IDLE && isReadyForPullEnd()){
+//					loadDialog.show();
+//		        	mHandler.sendEmptyMessageDelayed(1, 2000);
+//				}
+//				
+//				if(newState==RecyclerView.SCROLL_STATE_IDLE && isReadyForPullStart()){
+//					loadDialog.show();
+//		        	mHandler.sendEmptyMessageDelayed(0, 2000);
+//				}
 				super.onScrollStateChanged(recyclerView, newState);
 			}
 
@@ -148,12 +151,30 @@ public class ComplexRecycleView extends AppCompatActivity
 		});
 		
 		
+		mRecyclerView.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				
+				if(ViewCompat.canScrollVertically(v,-1)){
+					Log.e(TAG, "canScrollVertically(-1)");
+				}else{
+					Log.e(TAG, "No-canScrollVertically(-1)");
+				}
+				return false;
+			}
+		});
+		
+		
 		
 	}
 
 	
 	private void refresh(){
 		Toast.makeText(getBaseContext(), "刷新完成", 0).show();
+		
+	
 		mAdapter.addData(1);
 		//swipeLayout.setRefreshing(false);
 		loadDialog.dismiss();
@@ -210,7 +231,7 @@ public class ComplexRecycleView extends AppCompatActivity
 				//View lastVisibleChild=mRecyclerView.getChildAt(lastVisiblePosition-firstVisiblePosition);
 				View lastVisibleChild=layoutManager.findViewByPosition(lastVisiblePosition);
 				if (lastVisibleChild != null) {
-					//Log.e(TAG, "lastVisibleChild.getBottom():"+lastVisibleChild.getBottom()+",mRecyclerView.getBottom():"+mRecyclerView.getBottom());
+					//	Log.e(TAG, "lastVisibleChild.getBottom():"+lastVisibleChild.getBottom()+",mRecyclerView.getBottom():"+mRecyclerView.getBottom());
 					return lastVisibleChild.getBottom() <= mRecyclerView.getBottom()-mRecyclerView.getTop();
 					
 				}

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.zhy.sample.demo_recyclerview.HomeAdapter.OnItemClickLitener;
+import com.zhy.sample.refresh.RefreshActivity;
 
 public class HomeActivity extends AppCompatActivity
 {
@@ -123,6 +124,11 @@ public class HomeActivity extends AppCompatActivity
 			startActivity(intent);
 			break;
 		  }
+		case R.id.id_action_refesh:{
+			Intent intent = new Intent(this , RefreshActivity.class);
+			startActivity(intent);
+			break;
+		}
 			
 		}
 		return true;
