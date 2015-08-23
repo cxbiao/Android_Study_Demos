@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bryan.property_animation"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.bryan.property_animation.CategoryListActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.bryan.property_animation.Xml4AnimActivity" >
+        </activity>
+        <activity android:name="com.bryan.property_animation.ObjectAnimActivity" >
+        </activity>
+        <activity android:name="com.bryan.property_animation.ArcMenuActivity" >
+        </activity>
+        <activity android:name="com.bryan.property_animation.AnimatorSetActivity" >
+        </activity>
+        <activity android:name="com.bryan.property_animation.ViewAnimateActivity" >
+        </activity>
+        <activity android:name="com.bryan.property_animation.LayoutAnimaActivity" >
+        </activity>
+        <activity android:name="com.bryan.property_animation.ValueAnimatorActivity" >
+        </activity>
+    </application>
+
+</manifest>
