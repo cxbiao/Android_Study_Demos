@@ -1,0 +1,12 @@
+.settings
+bin
+gen
+.classpath
+.project
+.gradle
+.idea
+*.iml
+gradle/
+build/
+.DS_Store
+local.properties
