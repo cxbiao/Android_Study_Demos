@@ -20,14 +20,14 @@
             android:layout_height="@dimen/app_bar_height"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             >
-
+            <!--app:titleEnabled="false"  可以使toolbar的标题不跟随移动-->
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:titleEnabled="false"
+                app:expandedTitleMarginStart="@dimen/expanded_toolbar_title_margin_start"
                 >
 
                 <ImageView
@@ -42,7 +42,7 @@
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
