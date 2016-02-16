@@ -1,19 +1,17 @@
 package cn.bryan.designdemo;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,35 +28,21 @@ public class DesignActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     TabLayout tabLayout;
-    CollapsingToolbarLayout collapsingToolbarLayout;
     NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_design);
 
-        getCategory();
         initToolbar();
         initInstances();
-    }
-    //添加多渠道打包信息
-    public void getCategory(){
-        try {
-            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
-            String catetory = applicationInfo.metaData.getString("category");
-            System.out.println(catetory);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void initToolbar() {
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // toolbar.setNavigationIcon(R.drawable.ic_plus);
-       getSupportActionBar().setHomeButtonEnabled(true);
-       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+     //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void  initInstances(){
@@ -76,8 +60,7 @@ public class DesignActivity extends AppCompatActivity {
 
        //tabLayout.setupWithViewPager();
 
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-        collapsingToolbarLayout.setTitle("Design Library");
+
 
         drawerLayout= (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open ,R.string.close);
@@ -103,7 +86,8 @@ public class DesignActivity extends AppCompatActivity {
                         Snackbar.make(navigationView, "item4", Snackbar.LENGTH_SHORT).show();
                         break;
                 }
-                return false;
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                return true;
             }
         });
 
@@ -127,10 +111,15 @@ public class DesignActivity extends AppCompatActivity {
 
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
