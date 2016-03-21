@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bryan.MainActivity">
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="4"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Retrofit"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+
+        <Button
+            android:id="@+id/btn_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Get" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Post" />
+
+        <Button
+            android:id="@+id/btn_post_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Post Body" />
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Upload" />
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="down" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="4"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="RxJava与Retrofit结合"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+
+        <Button
+            android:id="@+id/btn_rx_get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Get" />
+
+        <Button
+            android:id="@+id/btn_rx_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Post" />
+
+        <Button
+            android:id="@+id/btn_rx_post_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Post Body" />
+
+        <Button
+            android:id="@+id/btn_rx_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="Upload" />
+
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_rx_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="down" />
+
+    </GridLayout>
+</RelativeLayout>
