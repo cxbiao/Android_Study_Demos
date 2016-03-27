@@ -183,9 +183,16 @@ public class HttpRxHelper {
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
+
+        CountingRequestBody countingRequestBody=new CountingRequestBody(requestFile, new CountingRequestBody.Listener() {
+            @Override
+            public void onRequestProgress(long bytesWritten, long contentLength) {
+                Log.e(TAG,contentLength+":"+bytesWritten);
+            }
+        });
         // MultipartBody.Part is used to send also the actual file name
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("formfile", file.getName(), requestFile);
+                MultipartBody.Part.createFormData("formfile", file.getName(), countingRequestBody);
 
         myService.upload(filename,filedes,body)
                 .subscribeOn(Schedulers.io())

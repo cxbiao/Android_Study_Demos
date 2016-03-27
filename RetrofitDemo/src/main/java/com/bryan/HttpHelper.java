@@ -143,12 +143,19 @@ public class HttpHelper {
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
+        CountingRequestBody countingRequestBody=new CountingRequestBody(requestFile, new CountingRequestBody.Listener() {
+            @Override
+            public void onRequestProgress(long bytesWritten, long contentLength) {
+                Log.e(TAG,contentLength+":"+bytesWritten);
+            }
+        });
+
         // MultipartBody.Part is used to send also the actual file name
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("formfile", file.getName(), requestFile);
+                MultipartBody.Part.createFormData("formfile", file.getName(), countingRequestBody);
 
 
-        Call<ResponseBody> userCall=myService.upload(filename, filedes, null);
+        Call<ResponseBody> userCall=myService.upload(filename, filedes, body);
         userCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
