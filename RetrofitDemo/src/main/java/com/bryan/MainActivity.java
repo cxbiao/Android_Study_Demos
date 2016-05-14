@@ -20,54 +20,64 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_get)
     public void btn_get(){
-         HttpHelper.getInstance().getUser();
+         HttpHelper.getInstance().findUserForGet();
     }
 
     @OnClick(R.id.btn_post)
     public void btn_post(){
-        HttpHelper.getInstance().getUserPost();
+        HttpHelper.getInstance().findUserForPost();
     }
 
     @OnClick(R.id.btn_post_body)
     public void btn_post_body(){
-       HttpHelper.getInstance().getUserPostBody();
+       HttpHelper.getInstance().postBodyJson();
     }
 
     @OnClick(R.id.btn_upload)
     public void btn_upload(){
-        HttpHelper.getInstance().upload();
+        HttpHelper.getInstance().uploads();
     }
 
 
     @OnClick(R.id.btn_down)
     public void btn_down(){
-         HttpHelper.getInstance().downFile("kfc.png");
+         HttpHelper.getInstance().downFile("girl.jpg");
+    }
+
+    @OnClick(R.id.btn_findList)
+    public void btn_findList(){
+        HttpHelper.getInstance().findUserList();
     }
 
 
     @OnClick(R.id.btn_rx_get)
     public void btn_rx_get(){
-        HttpRxHelper.getInstance().getUser();
+        HttpRxHelper.getInstance().findUserForGet();
     }
 
     @OnClick(R.id.btn_rx_post)
     public void btn_rx_post(){
-       HttpRxHelper.getInstance().getUserPost();
+       HttpRxHelper.getInstance().findUserForPost();
     }
 
     @OnClick(R.id.btn_rx_post_body)
     public void btn_rx_post_body(){
-        HttpRxHelper.getInstance().getUserPostBody();
+        HttpRxHelper.getInstance().postBodyJson();
     }
 
     @OnClick(R.id.btn_rx_upload)
     public void btn_rx_upload(){
-        HttpRxHelper.getInstance().upload();
+        HttpRxHelper.getInstance().uploads();
     }
 
     @OnClick(R.id.btn_rx_down)
     public void btn_rx_down(){
-        HttpRxHelper.getInstance().downFile("kfc.png");
+        HttpRxHelper.getInstance().downFile("girl.jpg");
+    }
+
+    @OnClick(R.id.btn_rx_findList)
+    public void btn_rx_findList(){
+        HttpRxHelper.getInstance().findUserList();
     }
 
 }

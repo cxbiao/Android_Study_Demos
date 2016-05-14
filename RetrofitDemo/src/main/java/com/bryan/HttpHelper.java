@@ -5,11 +5,12 @@ import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -29,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpHelper {
 
     private static final String TAG = "HttpHelper";
-    public static final String BASE_URL = "http://192.168.6.59:8080/";
+    public static final String BASE_URL = "http://192.168.1.104:8080/mobile/";
 
     private Retrofit retrofit;
     private MyService myService;
@@ -67,8 +68,8 @@ public class HttpHelper {
         private static HttpHelper instance = new HttpHelper();
     }
 
-    public void getUser(){
-        Call<User> userCall=myService.getUser(1,"abc");
+    public void findUserForGet(){
+        Call<User> userCall=myService.findUserForGet(12,"张明明","北京海淀区");
         userCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -85,20 +86,12 @@ public class HttpHelper {
         });
     }
 
-    public void getUserPost(){
-        Call<ResponseBody> userCall=myService.getUserPost(1, "abcd");
+    public void findUserForPost(){
+        Call<ResponseBody> userCall=myService.findUserForPost(9,"陈玄功","恶人谷");
         userCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e(TAG,response.body().toString());
-                try {
-                    //输出原始类型
-                    byte[] bytes=response.body().bytes();
-                    Log.e(TAG,new String(bytes,"UTF-8"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                Log.e(TAG,getResponsString(response.body()));
 
             }
 
@@ -109,12 +102,10 @@ public class HttpHelper {
         });
     }
 
-    public void getUserPostBody(){
-        User param=new User();
-        param.setId(100);
-        param.setAge(15);
-        param.setName("user");
-        Call<List<User>> userCall=myService.getUserPostBody(param);
+
+    public void findUserList(){
+
+        Call<List<User>> userCall=myService.findUserList();
         userCall.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -128,18 +119,43 @@ public class HttpHelper {
         });
     }
 
+
+
+    public void postBodyJson(){
+
+        User user=new User();
+        user.setId(2);
+        user.setUsername("李明");
+        user.setBirthday("1995-09-06 09-09-08");
+        user.setSex("1");
+        Call<User> userCall=myService.postBodyJson(user);
+        userCall.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Log.e(TAG,response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e(TAG,t.getMessage());
+            }
+        });
+    }
+
     public void upload(){
-        File file=new File(Environment.getExternalStorageDirectory(),"qa.docx");
+        File file=new File(Environment.getExternalStorageDirectory(),"测试01.jpg");
 
-
-        RequestBody filename =
+        //普通key/value
+        RequestBody username =
                 RequestBody.create(
-                        MediaType.parse("multipart/form-data"), "fname");
+                        MediaType.parse("multipart/form-data"), "jim");
 
-        RequestBody filedes =
+        RequestBody address =
                 RequestBody.create(
-                        MediaType.parse("multipart/form-data"), "f我");
+                        MediaType.parse("multipart/form-data"), "天津市");
 
+
+        //file
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
@@ -152,14 +168,77 @@ public class HttpHelper {
 
         // MultipartBody.Part is used to send also the actual file name
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("formfile", file.getName(), countingRequestBody);
+                MultipartBody.Part.createFormData("file", file.getName(), countingRequestBody);
 
 
-        Call<ResponseBody> userCall=myService.upload(filename, filedes, body);
+        Call<ResponseBody> userCall=myService.upload(username, address, body);
         userCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e(TAG, response.body().toString());
+                Log.e(TAG, getResponsString(response.body()));
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+            }
+        });
+    }
+
+    public void uploads(){
+
+
+        Map<String,RequestBody> params=new LinkedHashMap<>();
+        File file1=new File(Environment.getExternalStorageDirectory(),"测试01.jpg");
+        RequestBody filebody1 =RequestBody.create(MediaType.parse("multipart/form-data"), file1);
+        //记录文件上传进度
+        CountingRequestBody countingRequestBody1=new CountingRequestBody(filebody1, new CountingRequestBody.Listener() {
+            @Override
+            public void onRequestProgress(long bytesWritten, long contentLength) {
+                Log.e(TAG,"file1:"+contentLength+":"+bytesWritten);
+            }
+        });
+        //file代表服务器接收到的key,file1.getName()代表文件名
+        params.put("file\";filename=\""+file1.getName(),countingRequestBody1);
+
+
+
+        File file2=new File(Environment.getExternalStorageDirectory(),"girl.jpg");
+        RequestBody filebody2 =RequestBody.create(MediaType.parse("multipart/form-data"), file2);
+        CountingRequestBody countingRequestBody2=new CountingRequestBody(filebody2, new CountingRequestBody.Listener() {
+            @Override
+            public void onRequestProgress(long bytesWritten, long contentLength) {
+                Log.e(TAG,"file2:"+contentLength+":"+bytesWritten);
+            }
+        });
+        params.put("file\";filename=\""+file2.getName(),countingRequestBody2);
+
+
+        File file3=new File(Environment.getExternalStorageDirectory(),"测试02.jpg");
+        RequestBody filebody3 =RequestBody.create(MediaType.parse("multipart/form-data"), file3);
+        CountingRequestBody countingRequestBody3=new CountingRequestBody(filebody3, new CountingRequestBody.Listener() {
+            @Override
+            public void onRequestProgress(long bytesWritten, long contentLength) {
+                Log.e(TAG,"file3:"+contentLength+":"+bytesWritten);
+            }
+        });
+        params.put("file\";filename=\""+file3.getName(),countingRequestBody3);
+
+
+        //普通key/value
+        params.put("username",   RequestBody.create(
+                MediaType.parse("multipart/form-data"), "jim"));
+        params.put("address", RequestBody.create(
+                MediaType.parse("multipart/form-data"), "天津市"));
+
+
+
+        Call<ResponseBody> userCall=myService.uploads(params);
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                 Log.e(TAG, getResponsString(response.body()));
 
             }
 
@@ -177,7 +256,6 @@ public class HttpHelper {
         userCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                 Log.e(TAG,"success");
                 try {
 
                     String fileName=Environment.getExternalStorageDirectory()+"/"+fname;
@@ -195,6 +273,7 @@ public class HttpHelper {
                 }catch (Exception ex){
                     Log.e(TAG,ex.getMessage());
                 }
+                Log.e(TAG,"success");
 
             }
 
@@ -206,8 +285,7 @@ public class HttpHelper {
     }
 
 
-    private String guessMimeType(String fileName)
-    {
+    private String guessMimeType(String fileName) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String contentTypeFor = fileNameMap.getContentTypeFor(fileName);
         if (contentTypeFor == null)
@@ -215,5 +293,16 @@ public class HttpHelper {
             contentTypeFor = "application/octet-stream";
         }
         return contentTypeFor;
+    }
+
+
+    private String getResponsString(ResponseBody body){
+        try {
+            byte[] bytes=body.bytes();
+            return new String(bytes,"UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

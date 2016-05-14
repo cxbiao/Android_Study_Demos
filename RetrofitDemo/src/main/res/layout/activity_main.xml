@@ -64,6 +64,16 @@
             android:textAllCaps="false"
             android:text="down" />
 
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_findList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="findList" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,6 +126,15 @@
             android:layout_marginLeft="5dp"
             android:textAllCaps="false"
             android:text="down" />
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_rx_findList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:text="findList" />
 
     </GridLayout>
 </RelativeLayout>
